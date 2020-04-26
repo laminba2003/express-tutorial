@@ -2,14 +2,14 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 
-app.get('/', function (req, res) {
-   res.send('Hello World');
+app.get('/', function (request, response) {
+   response.send('Hello World');
 })
 
-app.get('/pays', function (req, res) {
+app.get('/pays', function (request, response) {
    fs.readFile('pays.json', 'utf8', function (erreur, donnees) {
 	if (erreur) throw erreur; 
-	res.send(donnees);
+	response.send(donnees);
   });
 })
 
