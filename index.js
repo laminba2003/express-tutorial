@@ -1,22 +1,10 @@
-const express = require('express');
-const app = express();
-const fs = require('fs');
+// file server.js
+import express from 'express'
+const app = express()
 
-app.get('/', function (request, response) {
-   response.send('Hello World');
+// respond with "hello world" when a GET request is made to the homepage
+app.get('/', function (req, res) {
+  res.send('hello world')
 })
 
-app.get('/pays', function (request, response) {
-   fs.readFile('pays.json', 'utf8', function (erreur, donnees) {
-	if (erreur) throw erreur; 
-	response.send(donnees);
-  });
-})
-
-
-const server = app.listen(8082, function () {
-   const host = server.address().address
-   const port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
-});
-
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
