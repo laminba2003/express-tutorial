@@ -1,21 +1,16 @@
 import express from 'express'
 const app = express()
-const pays = require('./controllers/pays.controller');
-app.use('/pays', pays);
 
+// enregistrement du controller pays dans l'appliation
+app.use('/pays', require('./controllers/pays.controller'));
+
+// enregistrement du controller clients dans l'appliation
+app.use('/clients', require('./controllers/client.controller'));
+
+
+// gestion de la page d'accueil
 app.get('/', function (request, response) {
-  response.send('hello world')
-})
-
-app.listen(3000, () => console.log('app listening on port 3000!'))
-
-import express from 'express'
-const app = express()
-const pays = require('./controllers/client.controller');
-app.use('/client', client);
-
-app.get('/', function (request, response) {
-  response.send('here is the clients')
-})
-
-app.listen(3000, () => console.log('app listening on port 3000!'))
+   response.send('Bienvenue sur notre application')
+ })
+ 
+app.listen(3000, () => console.log('notre application tourne sur le port 3000!'))
