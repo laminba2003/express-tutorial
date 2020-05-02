@@ -1,6 +1,6 @@
 import { Client } from "../models/client";
 
-export class PaysService {
+export class ClientService {
     
     getClient() {
         const client = [];
