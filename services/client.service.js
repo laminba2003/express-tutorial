@@ -2,17 +2,21 @@ import { Client } from "../models/client";
 
 export class ClientService {
     
-    getClient() {
-        const client = [];
-        const client1 = new Client();
-        client1.nom = "thomson";
-        client1.prenom = "Gabriel";
-        client.push(client1);
-        const client2 = new Client();
-        client2.nom = "Ford";
-        client2.prenom = "Taraji";
-        client.push(client2);
-        return client;
+    async getClient(id) {
+        const db = require("./../db")
+        const connection = await db.connect();
+        const [rows] = await connection.query('select * from client where id = ?', [id]);
+        return rows.length ? rows[0] : null;
     }
 
+    async saveClient(client) {
+        const db = require("./../db")
+        const connection = await db.connect();
+        const [result] = await connection.query('insert into client(nom, prenom, adresse, pays, email, telephone) values(?,?,?,?,?,?)', [client.nom, client.prenom,client.adresse,client.pays,client.email,client.telephone]);
+        client.id = result.insertId;
+        return client;
+    };
+
 }
+
+
